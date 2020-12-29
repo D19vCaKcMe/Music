@@ -12,7 +12,7 @@ module.exports = {
 
   run: async function (client, message, args) {
     const queue = message.client.queue.get(message.guild.id);
-    if (!queue) return sendError("There is nothing playing.",message.channel).catch(console.error);
+    if (!queue) return sendError("Error occured because nothing playing in this server.",message.channel).catch(console.error);
 
     let lyrics = null;
 
@@ -26,7 +26,7 @@ module.exports = {
     let lyricsEmbed = new MessageEmbed()
       .setAuthor(`${queue.songs[0].title} — Lyrics`, "https://raw.githubusercontent.com/SudhanPlayz/Discord-MusicBot/master/assets/Music.gif")
       .setThumbnail(queue.songs[0].img)
-      .setColor("YELLOW")
+      .setColor("RANDOM")
       .setDescription(lyrics)
       .setTimestamp();
 

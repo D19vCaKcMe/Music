@@ -15,14 +15,14 @@ module.exports = {
 
   run: async function (client, message, args) {
     let channel = message.member.voice.channel;
-    if (!channel)return sendError("I'm sorry but you need to be in a voice channel to play music!", message.channel);
+    if (!channel)return sendError("error occured please join voice channel", message.channel);
 
     const permissions = channel.permissionsFor(message.client.user);
     if (!permissions.has("CONNECT"))return sendError("I cannot connect to your voice channel, make sure I have the proper permissions!", message.channel);
     if (!permissions.has("SPEAK"))return sendError("I cannot speak in this voice channel, make sure I have the proper permissions!", message.channel);
 
     var searchString = args.join(" ");
-    if (!searchString)return sendError("You didn't poivide want i want to play", message.channel);
+    if (!searchString)return sendError("<name song> or <link>", message.channel);
    	const url = args[0] ? args[0].replace(/<(.+)>/g, "$1") : "";
    var serverQueue = message.client.queue.get(message.guild.id);
 
@@ -73,13 +73,10 @@ module.exports = {
     if (serverQueue) {
       serverQueue.songs.push(song);
       let thing = new MessageEmbed()
-      .setAuthor("Song has been added to queue", "https://raw.githubusercontent.com/SudhanPlayz/Discord-MusicBot/master/assets/Music.gif")
+      .setAuthor("Added song to queue", "https://cdn.discordapp.com/attachments/788426369880293381/791925104559783966/-1_1_____.gif")
       .setThumbnail(song.img)
-      .setColor("YELLOW")
-      .addField("Name", song.title, true)
-      .addField("Duration", song.duration, true)
-      .addField("Requested by", song.req.tag, true)
-      .setFooter(`Views: ${song.views} | ${song.ago}`)
+      .setColor("RANDOM")
+      .addField("Name :" ,song.title, true)
       return message.channel.send(thing);
     }
 
@@ -104,7 +101,7 @@ module.exports = {
     var online = afk[message.guild.id]
     if (!song){
       if (!online.afk) {
-        sendError("Leaving the voice channel because I think there are no songs in the queue. If you like the bot stay 24/7 in voice channel run `!afk`\n\nThank you for using my code! [GitHub](https://github.com/SudhanPlayz/Discord-MusicBot)", message.channel)
+        sendError()
         message.guild.me.voice.channel.leave();//If you want your bot stay in vc 24/7 remove this line :D
         message.client.queue.delete(message.guild.id);
       }
@@ -138,13 +135,10 @@ stream.on('error', function(er)  {
 
       dispatcher.setVolumeLogarithmic(queue.volume / 100);
       let thing = new MessageEmbed()
-      .setAuthor("Started Playing Music!", "https://raw.githubusercontent.com/SudhanPlayz/Discord-MusicBot/master/assets/Music.gif")
+      .setAuthor("Started Playing Music!", "https://cdn.discordapp.com/attachments/788426369880293381/791925104559783966/-1_1_____.gif")
       .setThumbnail(song.img)
-      .setColor("BLUE")
-      .addField("Name", song.title, true)
-      .addField("Duration", song.duration, true)
-      .addField("Requested by", song.req.tag, true)
-      .setFooter(`Views: ${song.views} | ${song.ago}`)
+      .setColor("RANDOM")
+      .addField("Name :", song.title, true)
       queue.textChannel.send(thing);
     };
 

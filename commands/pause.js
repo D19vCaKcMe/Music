@@ -20,11 +20,11 @@ module.exports = {
         return sendError(`:notes: The player has stopped and the queue has been cleared.: ${error}`, message.channel);
       }	    
       let xd = new MessageEmbed()
-      .setDescription("⏸ Paused the music for you!")
-      .setColor("YELLOW")
-      .setTitle("Music has been paused!")
+      .setDescription("Your song has been paused")
+      .setColor("RANDOM")
+      .setTitle("")
       return message.channel.send(xd);
     }
-    return sendError("There is nothing playing in this server.", message.channel);
+    return sendError("Error occured because nothing playing in this server.", message.channel);
   },
 };
